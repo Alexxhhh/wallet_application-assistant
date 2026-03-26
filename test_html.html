@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendIA - Assistente Finanziario</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Inserimento e Info -->
+        <aside class="sidebar glass-panel">
+            <div class="logo">
+                <i class="fa-solid fa-wallet"></i>
+                <h2>SpendIA</h2>
+            </div>
+
+            <div class="expense-form-container">
+                <h3><i class="fa-solid fa-plus-circle"></i> Nuova Spesa</h3>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="amount">Importo (€)</label>
+                        <input type="number" id="amount" step="0.01" min="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoria</label>
+                        <select id="category" required>
+                            <option value="Alimentari">Alimentari</option>
+                            <option value="Trasporti">Trasporti</option>
+                            <option value="Svago">Svago</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Salute">Salute</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Data</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descrizione (opzionale)</label>
+                        <input type="text" id="description" placeholder="Es. Spesa al supermercato">
+                    </div>
+                    <button type="submit" class="btn-primary">Aggiungi Spesa</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard: Grafici e Tabella -->
+        <main class="dashboard">
+            <header class="glass-header">
+                <div class="header-left">
+                    <h1>Dashboard Spese</h1>
+                    <p class="subtitle">Monitora e analizza il tuo budget mensile</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Cerca spese o categorie...">
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Sezione Statistiche e Grafico -->
+                <div class="stats-container">
+                    <div class="stat-card glass-panel totals">
+                        <h3>Totale Spese Mostrate</h3>
+                        <h2 id="total-amount">€ 0.00</h2>
+                    </div>
+                    <div class="chart-container glass-panel">
+                        <canvas id="expensesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Lista Transazioni -->
+                <div class="expenses-list-container glass-panel">
+                    <h3>Transazioni</h3>
+                    <div class="table-responsive">
+                        <table id="expenses-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrizione</th>
+                                    <th>Categoria</th>
+                                    <th>Importo</th>
+                                    <th>Azione</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expenses-body">
+                                <!-- Righe aggiunte dinamicamente tramite JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Pannello Chatbot Laterale -->
+        <aside class="chatbot-panel glass-panel">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Assistente IA</h3>
+                </div>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    Ciao! 👋 Sono il tuo assistente finanziario intelligente basato su Gemini AI.
+                    <br><br>Puoi farmi domande sulle tue spese e le analizzerò per te!
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Es: Quanto ho speso in Alimentari?">
+                <button id="chat-send" class="btn-icon"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Script principale App.js -->
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
